@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#faf9f7">
+  <meta name="description" content="A fictional, browser-only classroom story about where health data can go.">
+  <title>VitalSense — One number, many destinations</title>
+  <style>
+    @font-face{font-family:VitalCodec;src:url('./CodecPro-Regular.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
+    @font-face{font-family:VitalCodec;src:url('./CodecPro-Italic.ttf') format('truetype');font-style:italic;font-weight:400;font-display:swap}
+    :root{--paper:#faf9f7;--white:#fff;--black:#191919;--muted:#5f5c5c;--line:#dcd6d2;--red:#de473a;--red-text:#ad3027;--pink:#df8db6;--soft:#f5ecec;--font:VitalCodec,Arial,sans-serif}
+    *{box-sizing:border-box}html{background:var(--paper)}body{margin:0;color:var(--black);background:var(--paper);font:17px/1.43 var(--font);-webkit-font-smoothing:antialiased}
+    button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid var(--black);outline-offset:3px}a{color:inherit}p{margin:0}h1,h2,h3{font-family:var(--font);font-weight:900;line-height:.99;letter-spacing:-.045em;margin:0}
+    .shell{width:min(100%,1120px);min-height:100svh;margin:auto;padding:0 20px max(20px,env(safe-area-inset-bottom));display:flex;flex-direction:column}
+    .topbar{height:70px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--black)}.logo{font:900 1.05rem/1 var(--font);letter-spacing:-.04em}.logo em{font-style:normal;color:var(--red)}.topright{display:flex;align-items:center;gap:14px}.sim{border:1px solid var(--black);padding:5px 8px;font:700 .63rem/1 var(--font);letter-spacing:.09em;white-space:nowrap}.step{font:800 .8rem/1 var(--font);white-space:nowrap}
+    main{flex:1}.screen{min-height:calc(100svh - 130px);padding:clamp(26px,5vw,58px) 0;display:flex;flex-direction:column;justify-content:center}.screen[hidden],.scenario[hidden],.chooser[hidden]{display:none!important}.kicker{font:800 .74rem/1 var(--font);letter-spacing:.17em;text-transform:uppercase;color:var(--red-text);margin-bottom:22px}.screen h1{font-size:clamp(3.05rem,12vw,7.9rem);max-width:10ch}.screen h2{font-size:clamp(2.65rem,10vw,6.6rem);max-width:13ch}.dek{font-size:clamp(1.02rem,2.7vw,1.3rem);max-width:53ch;color:var(--muted);margin-top:18px}
+    .hero-grid{display:grid;grid-template-columns:1fr;gap:26px}.measure{position:relative;isolation:isolate;min-height:235px;display:flex;align-items:center;justify-content:center;margin:0 -20px;overflow:hidden}.measure::before{content:'';position:absolute;z-index:-1;width:90%;height:100%;left:2%;top:1%;background:radial-gradient(ellipse at 31% 30%,#de473a 0,transparent 52%),radial-gradient(ellipse at 75% 68%,#df8db6 0,transparent 55%);filter:blur(27px);opacity:.76;transform:rotate(-13deg)}.measure::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,var(--paper),transparent 17%,transparent 82%,var(--paper))}.value{font:900 clamp(7rem,33vw,15rem)/.75 var(--font);letter-spacing:-.11em;color:var(--black)}.unit{align-self:flex-end;margin:0 0 40px 10px;font:800 1rem/1 var(--font)}
+    .number-line{display:flex;justify-content:space-between;align-items:start;gap:16px;border-top:1px solid var(--black);padding-top:12px;margin-top:8px}.number-line strong{font:.8rem/1.25 var(--font);letter-spacing:.08em}.number-line span{font-size:.85rem;color:var(--muted);text-align:right;max-width:24ch}
+    .choice-toggle{display:inline-flex;align-items:center;gap:6px;margin:14px 0 0;padding:0;border:0;background:none;color:var(--black);font-weight:700;text-decoration:underline;text-underline-offset:4px}.chooser{border-top:1px solid var(--line);padding-top:15px;margin-top:14px}.chooser label{display:block;font-weight:700;margin-bottom:8px}.options{display:flex;gap:8px}.option{min-width:62px;min-height:50px;padding:0 12px;border:1px solid var(--black);background:var(--white);font-weight:800}.option[aria-pressed=true]{background:var(--black);color:var(--white)}.custom-row{display:flex;align-items:center;gap:10px;margin-top:12px}.custom-row input{width:110px;height:50px;padding:0 12px;border:1px solid var(--black);border-radius:0;background:var(--white);color:var(--black)}.custom-row span{font-size:.83rem;color:var(--muted)}.error{min-height:1.3em;margin-top:5px;color:#a22b23;font-size:.83rem}
+    .bottom{margin-top:30px}.privacy{max-width:63ch;color:var(--muted);font-size:.86rem;line-height:1.42}.privacy strong{color:var(--black)}.cta-row{display:flex;gap:12px;margin-top:18px}.button{min-height:58px;padding:14px 21px;border:1px solid var(--black);border-radius:0;font:900 1rem/1.15 var(--font);text-align:left}.button.primary{flex:1;background:var(--black);color:var(--white);display:flex;justify-content:space-between;align-items:center;gap:18px}.button.primary:hover{background:var(--red);border-color:var(--red)}.button.back{background:transparent;color:var(--black)}.button.back:hover{background:#eee9e5}
+    .range-note{border-top:1px solid var(--line);padding-top:10px;margin-top:18px;max-width:56ch;color:var(--muted);font-size:.8rem}.range-note b{color:var(--black)}
+    .receipt{margin-top:32px;border-top:2px solid var(--black);border-bottom:2px solid var(--black)}.receipt-row{display:grid;grid-template-columns:92px 1fr;gap:15px;padding:17px 0;border-bottom:1px solid var(--line)}.receipt-row:last-child{border:0}.receipt-label{font:800 .68rem/1.2 var(--font);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}.receipt-content{font:900 clamp(1.2rem,5vw,2.1rem)/1.08 var(--font)}.receipt-content small{display:block;margin-top:7px;color:var(--muted);font:400 .86rem/1.4 var(--font);letter-spacing:normal}.receipt-row.alert{background:linear-gradient(90deg,#de473a12,#df8db61f);margin:0 -12px;padding-left:12px;padding-right:12px}.receipt-row.alert .receipt-label,.receipt-row.alert .receipt-content{color:var(--red-text)}.caution{margin-top:18px;max-width:60ch;font-size:.9rem;color:var(--muted)}.caution b{color:var(--black)}
+    .route{margin-top:26px;display:flex;align-items:center;gap:9px;font:800 .73rem/1.25 var(--font);letter-spacing:.04em;text-transform:uppercase;flex-wrap:wrap}.route .chev{color:var(--red);font-size:1.2rem}.tabs{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--black);margin-top:25px}.tab{min-height:50px;padding:8px 4px;border:0;border-right:1px solid var(--black);border-radius:0;background:var(--paper);font-weight:800;color:var(--black)}.tab:last-child{border-right:0}.tab[aria-selected=true]{background:var(--black);color:var(--white)}.tab:hover:not([aria-selected=true]){background:#eee9e5}
+    .scenario{padding:24px 0 12px;min-height:190px}.scenario .category{font:800 .72rem/1 var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--red-text)}.scenario h3{font-size:clamp(2.5rem,11vw,5.5rem);margin:10px 0 13px}.scenario .effect{font-size:clamp(1.05rem,3.5vw,1.3rem);max-width:55ch}.scenario .detail{color:var(--muted);font-size:.9rem;max-width:59ch;margin-top:10px}.question{border-top:1px solid var(--black);padding-top:15px;margin-top:12px;font:900 clamp(1.45rem,5.2vw,2.2rem)/1.1 var(--font)}.principles{color:var(--muted);font-size:.84rem;margin-top:9px;max-width:62ch}
+    footer{border-top:1px solid var(--line);padding:13px 0;color:var(--muted);font-size:.72rem;line-height:1.35}footer a{text-decoration:underline;text-underline-offset:2px}
+    @media(min-width:760px){.shell{padding-left:42px;padding-right:42px}.hero-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:end;gap:25px}.measure{margin:0;min-height:340px}.measure::before{width:100%}.value{font-size:clamp(10rem,20vw,17rem)}.unit{margin-bottom:52px}.intro-copy{padding-bottom:24px}.bottom{max-width:690px}.receipt{max-width:830px}.scenario{min-height:205px}}
+    @media(max-width:370px){.topbar{height:62px}.logo{font-size:.9rem}.sim{font-size:.56rem}.step{font-size:.7rem}.screen{min-height:calc(100svh - 122px)}.screen h1{font-size:2.75rem}.measure{min-height:190px}.value{font-size:6.5rem}.unit{margin-bottom:29px}.receipt-row{grid-template-columns:75px 1fr}}
+    @media(prefers-reduced-motion:no-preference){.screen:not([hidden]){animation:enter .22s ease-out}@keyframes enter{from{opacity:.5;transform:translateY(7px)}to{opacity:1;transform:none}}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar"><div class="logo">VITAL<em>SENSE</em></div><div class="topright"><span class="sim">FICTIONAL SIMULATION</span><span class="step" id="step">01 / 03</span></div></header>
+    <main>
+      <section class="screen" id="intro" aria-labelledby="intro-title">
+        <p class="kicker">01 / Start with one number</p>
+        <div class="hero-grid">
+          <div class="intro-copy"><h1 id="intro-title" tabindex="-1">One number.<br>Many destinations.</h1><p class="dek">A health app promises helpful insights. What could happen if the information travels further?</p></div>
+          <div><div class="measure" aria-label="Fictional pulse example"><strong class="value" id="intro-pulse">84</strong><span class="unit">BPM</span></div><div class="number-line"><strong>FICTIONAL PULSE</strong><span>Use this example. No one needs to share a personal number.</span></div></div>
+        </div>
+        <div class="bottom"><button class="choice-toggle" id="toggle-choice" type="button" aria-expanded="false" aria-controls="chooser">Choose another invented value <span aria-hidden="true">↗</span></button>
+          <div class="chooser" id="chooser" hidden><label for="custom">Choose an invented pulse</label><div class="options" role="group" aria-label="Fictional pulse examples"><button class="option" type="button" data-pulse="72" aria-pressed="false">72</button><button class="option" type="button" data-pulse="84" aria-pressed="true">84</button><button class="option" type="button" data-pulse="96" aria-pressed="false">96</button></div><div class="custom-row"><input id="custom" type="number" inputmode="numeric" min="40" max="180" placeholder="e.g. 78" autocomplete="off"><span>Fictional number only · 40–180 bpm</span></div><p class="error" id="error" role="alert"></p></div>
+          <div class="cta-row"><button class="button primary" id="begin" type="button"><span>Continue with <span id="button-pulse">84</span> bpm</span><span aria-hidden="true">→</span></button></div>
+          <p class="privacy" style="margin-top:13px"><strong>Keep it fictional.</strong> Your chosen number stays in this tab. This page does not send or save it.</p>
+          <p class="range-note"><b>Reference:</b> For most adults at rest, 60–100 bpm is a general range. One number cannot diagnose stress or illness.</p>
+        </div>
+      </section>
+      <section class="screen" id="handoff" aria-labelledby="handoff-title" hidden>
+        <p class="kicker">02 / The handoff</p>
+        <h2 id="handoff-title" tabindex="-1">You agreed to<br>health insights.</h2>
+        <p class="dek">In this fictional story, VitalSense goes further.</p>
+        <div class="receipt" aria-label="Simulated data journey">
+          <div class="receipt-row"><span class="receipt-label">Input</span><div class="receipt-content"><span id="shown-pulse">84</span> bpm <small>An invented pulse chosen for this exercise.</small></div></div>
+          <div class="receipt-row"><span class="receipt-label">Inference</span><div class="receipt-content">“Elevated stress” <small>An invented label. This pulse value cannot establish stress.</small></div></div>
+          <div class="receipt-row alert"><span class="receipt-label">New use</span><div class="receipt-content">Shared with other companies <small>Beyond the wellness insights accepted in the story.</small></div></div>
+        </div>
+        <p class="caution"><b>Pause here:</b> a measurement, an inference, and a decision are different steps. Each needs its own justification. No information is actually shared by this page.</p>
+        <div class="cta-row bottom"><button class="button back" id="back1" type="button">← Back</button><button class="button primary" id="next" type="button"><span>See possible consequences</span><span aria-hidden="true">→</span></button></div>
+      </section>
+      <section class="screen" id="outcomes" aria-labelledby="outcomes-title" hidden>
+        <p class="kicker">03 / Possible consequences</p>
+        <h2 id="outcomes-title" tabindex="-1">Where could<br>the label go?</h2>
+        <p class="dek">Three fictional destinations. Select one to see the possible effect.</p>
+        <div class="route"><span>VitalSense</span><span class="chev" aria-hidden="true">→</span><span>Other company</span><span class="chev" aria-hidden="true">→</span><span>Decision about you</span></div>
+        <div class="tabs" role="tablist" aria-label="Fictional consequences"><button class="tab" id="tab-ads" type="button" role="tab" aria-controls="panel-ads" aria-selected="true" data-scenario="ads">Ads</button><button class="tab" id="tab-insurance" type="button" role="tab" aria-controls="panel-insurance" aria-selected="false" data-scenario="insurance">Insurance</button><button class="tab" id="tab-work" type="button" role="tab" aria-controls="panel-work" aria-selected="false" data-scenario="work">Work</button></div>
+        <article class="scenario" id="panel-ads" role="tabpanel" aria-labelledby="tab-ads"><p class="category">Fictional company / Advertising</p><h3>AdVista</h3><p class="effect">Uses the invented “stress” label to target wellness ads.</p><p class="detail">A private concern becomes a marketing category, although the label may be wrong.</p></article>
+        <article class="scenario" id="panel-insurance" role="tabpanel" aria-labelledby="tab-insurance" hidden><p class="category">Fictional company / Insurance</p><h3>HarborCover</h3><p class="effect">Uses an invented risk score to reduce a wellness reward.</p><p class="detail">A questionable inference changes a financial outcome.</p></article>
+        <article class="scenario" id="panel-work" role="tabpanel" aria-labelledby="tab-work" hidden><p class="category">Fictional company / Employment</p><h3>Northstar Work</h3><p class="effect">Treats a sleep or stress label as a sign of unreliability.</p><p class="detail">A worker is passed over based on an unsupported profile.</p></article>
+        <p class="question">Which step should VitalSense have to justify?</p>
+        <p class="principles">Collection → inference → sharing → decision. GDPR principles ask whether each use is lawful, limited to its purpose, necessary, accurate, time-limited, and accountable.</p>
+        <div class="cta-row bottom"><button class="button back" id="back2" type="button">← Back</button><button class="button primary" id="restart" type="button"><span>Start again</span><span aria-hidden="true">↺</span></button></div>
+      </section>
+    </main>
+    <footer>Classroom simulation · All people, companies, labels and outcomes on this page are fictional. The page has no analytics or external assets. <a href="https://www.heart.org/en/health-topics/high-blood-pressure/the-facts-about-high-blood-pressure/all-about-heart-rate-pulse" target="_blank" rel="noopener noreferrer">Resting-pulse reference</a> (opens an external site).</footer>
+  </div>
+  <script>
+    (() => {
+      'use strict';
+      let pulse = 84;
+      let selected = 84;
+      const ids = ['intro', 'handoff', 'outcomes'];
+      const $ = id => document.getElementById(id);
+      function show(index) {
+        ids.forEach((id, i) => { $(id).hidden = i !== index; });
+        $('step').textContent = `0${index + 1} / 03`;
+        window.scrollTo(0, 0);
+        $(ids[index]).querySelector('h1,h2').focus();
+      }
+      function updatePulse(value) {
+        selected = value;
+        $('intro-pulse').textContent = String(value);
+        $('button-pulse').textContent = String(value);
+        document.querySelectorAll('[data-pulse]').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.pulse) === value)));
+      }
+      $('toggle-choice').addEventListener('click', () => {
+        const opening = $('chooser').hidden;
+        $('chooser').hidden = !opening;
+        $('toggle-choice').setAttribute('aria-expanded', String(opening));
+        if (opening) $('custom').focus();
+      });
+      document.querySelectorAll('[data-pulse]').forEach(button => button.addEventListener('click', () => {
+        $('custom').value = '';
+        $('error').textContent = '';
+        updatePulse(Number(button.dataset.pulse));
+      }));
+      $('custom').addEventListener('input', () => {
+        $('error').textContent = '';
+        document.querySelectorAll('[data-pulse]').forEach(b => b.setAttribute('aria-pressed', 'false'));
+      });
+      $('begin').addEventListener('click', () => {
+        const raw = $('custom').value.trim();
+        const value = raw === '' ? selected : Number(raw);
+        if (!Number.isInteger(value) || value < 40 || value > 180) {
+          $('error').textContent = 'Enter a whole invented number from 40 to 180.';
+          $('chooser').hidden = false;
+          $('toggle-choice').setAttribute('aria-expanded', 'true');
+          $('custom').focus();
+          return;
+        }
+        pulse = value;
+        updatePulse(pulse);
+        $('shown-pulse').textContent = String(pulse);
+        $('custom').value = '';
+        show(1);
+      });
+      $('back1').addEventListener('click', () => show(0));
+      $('next').addEventListener('click', () => show(2));
+      $('back2').addEventListener('click', () => show(1));
+      function selectScenario(name, focus = false) {
+        document.querySelectorAll('[data-scenario]').forEach(tab => {
+          const active = tab.dataset.scenario === name;
+          tab.setAttribute('aria-selected', String(active));
+          tab.tabIndex = active ? 0 : -1;
+          if (active && focus) tab.focus();
+        });
+        ['ads','insurance','work'].forEach(key => { $('panel-' + key).hidden = key !== name; });
+      }
+      document.querySelectorAll('[data-scenario]').forEach(tab => {
+        tab.addEventListener('click', () => selectScenario(tab.dataset.scenario));
+        tab.addEventListener('keydown', event => {
+          if (!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+          event.preventDefault();
+          const names = ['ads','insurance','work'];
+          const current = names.indexOf(tab.dataset.scenario);
+          const next = event.key === 'Home' ? 0 : event.key === 'End' ? 2 : (current + (event.key === 'ArrowRight' ? 1 : 2)) % 3;
+          selectScenario(names[next], true);
+        });
+      });
+      $('restart').addEventListener('click', () => {
+        pulse = 84;
+        updatePulse(84);
+        $('custom').value = '';
+        $('chooser').hidden = true;
+        $('toggle-choice').setAttribute('aria-expanded', 'false');
+        $('error').textContent = '';
+        selectScenario('ads');
+        show(0);
+      });
+    })();
+  </script>
+</body>
+</html>
+
