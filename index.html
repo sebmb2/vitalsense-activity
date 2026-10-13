@@ -21,7 +21,7 @@
     .bottom{margin-top:30px}.privacy{max-width:63ch;color:var(--muted);font-size:.86rem;line-height:1.42}.privacy strong{color:var(--black)}.cta-row{display:flex;gap:12px;margin-top:18px}.button{min-height:58px;padding:14px 21px;border:1px solid var(--black);border-radius:0;font:900 1rem/1.15 var(--font);text-align:left}.button.primary{flex:1;background:var(--black);color:var(--white);display:flex;justify-content:space-between;align-items:center;gap:18px}.button.primary:hover{background:var(--red);border-color:var(--red)}.button.back{background:transparent;color:var(--black)}.button.back:hover{background:#eee9e5}
     .range-note{border-top:1px solid var(--line);padding-top:10px;margin-top:18px;max-width:56ch;color:var(--muted);font-size:.8rem}.range-note b{color:var(--black)}
     .receipt{margin-top:32px;border-top:2px solid var(--black);border-bottom:2px solid var(--black)}.receipt-row{display:grid;grid-template-columns:92px 1fr;gap:15px;padding:17px 0;border-bottom:1px solid var(--line)}.receipt-row:last-child{border:0}.receipt-label{font:800 .68rem/1.2 var(--font);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}.receipt-content{font:900 clamp(1.2rem,5vw,2.1rem)/1.08 var(--font)}.receipt-content small{display:block;margin-top:7px;color:var(--muted);font:400 .86rem/1.4 var(--font);letter-spacing:normal}.receipt-row.alert{background:linear-gradient(90deg,#de473a12,#df8db61f);margin:0 -12px;padding-left:12px;padding-right:12px}.receipt-row.alert .receipt-label,.receipt-row.alert .receipt-content{color:var(--red-text)}.caution{margin-top:18px;max-width:60ch;font-size:.9rem;color:var(--muted)}.caution b{color:var(--black)}
-    .route{margin-top:26px;display:flex;align-items:center;gap:9px;font:800 .73rem/1.25 var(--font);letter-spacing:.04em;text-transform:uppercase;flex-wrap:wrap}.route .chev{color:var(--red);font-size:1.2rem}.tabs{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--black);margin-top:25px}.tab{min-height:50px;padding:8px 4px;border:0;border-right:1px solid var(--black);border-radius:0;background:var(--paper);font-weight:800;color:var(--black)}.tab:last-child{border-right:0}.tab[aria-selected=true]{background:var(--black);color:var(--white)}.tab:hover:not([aria-selected=true]){background:#eee9e5}
+    .route{margin-top:26px;display:flex;align-items:center;gap:9px;font:800 .73rem/1.25 var(--font);letter-spacing:.04em;text-transform:uppercase;flex-wrap:wrap}.route .chev{color:var(--red);font-size:1.2rem}.tabs{display:flex;overflow-x:auto;scrollbar-width:thin;border:1px solid var(--black);margin-top:25px}.tab{flex:1 0 110px;min-height:50px;padding:8px 9px;border:0;border-right:1px solid var(--black);border-radius:0;background:var(--paper);font-weight:800;color:var(--black);white-space:nowrap}.tab:last-child{border-right:0}.tab[aria-selected=true]{background:var(--black);color:var(--white)}.tab:hover:not([aria-selected=true]){background:#eee9e5}
     .scenario{padding:24px 0 12px;min-height:190px}.scenario .category{font:800 .72rem/1 var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--red-text)}.scenario h3{font-size:clamp(2.5rem,11vw,5.5rem);margin:10px 0 13px}.scenario .effect{font-size:clamp(1.05rem,3.5vw,1.3rem);max-width:55ch}.scenario .detail{color:var(--muted);font-size:.9rem;max-width:59ch;margin-top:10px}.question{border-top:1px solid var(--black);padding-top:15px;margin-top:12px;font:900 clamp(1.45rem,5.2vw,2.2rem)/1.1 var(--font)}.principles{color:var(--muted);font-size:.84rem;margin-top:9px;max-width:62ch}
     footer{border-top:1px solid var(--line);padding:13px 0;color:var(--muted);font-size:.72rem;line-height:1.35}footer a{text-decoration:underline;text-underline-offset:2px}
     @media(min-width:760px){.shell{padding-left:42px;padding-right:42px}.hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(28px,4vw,60px)}.hero-grid>div{min-width:0}.measure{margin:0;min-height:310px}.measure::before{width:100%}.value{font-size:clamp(10rem,19vw,14rem)}.unit{margin-bottom:44px}.intro-copy{padding-bottom:0}.bottom{max-width:690px}.receipt{max-width:830px}.scenario{min-height:205px}}
@@ -40,10 +40,10 @@
           <div><div class="measure" aria-label="Fictional pulse example"><strong class="value" id="intro-pulse">84</strong><span class="unit">BPM</span></div><div class="number-line"><strong>FICTIONAL PULSE</strong><span>Use this example. No one needs to share a personal number.</span></div></div>
         </div>
         <div class="bottom"><button class="choice-toggle" id="toggle-choice" type="button" aria-expanded="false" aria-controls="chooser">Choose another invented value <span aria-hidden="true">↗</span></button>
-          <div class="chooser" id="chooser" hidden><label for="custom">Choose an invented pulse</label><div class="options" role="group" aria-label="Fictional pulse examples"><button class="option" type="button" data-pulse="72" aria-pressed="false">72</button><button class="option" type="button" data-pulse="84" aria-pressed="true">84</button><button class="option" type="button" data-pulse="96" aria-pressed="false">96</button></div><div class="custom-row"><input id="custom" type="number" inputmode="numeric" min="40" max="180" placeholder="e.g. 78" autocomplete="off"><span>Fictional number only · 40–180 bpm</span></div><p class="error" id="error" role="alert"></p></div>
+          <div class="chooser" id="chooser" hidden><label for="custom">Choose an invented pulse to explore another story</label><div class="options" role="group" aria-label="Fictional pulse examples"><button class="option" type="button" data-pulse="72" aria-pressed="false">72</button><button class="option" type="button" data-pulse="84" aria-pressed="true">84</button><button class="option" type="button" data-pulse="96" aria-pressed="false">96</button></div><div class="custom-row"><input id="custom" type="number" inputmode="numeric" min="40" max="180" placeholder="e.g. 78" autocomplete="off"><span>Fictional number only · 40–180 bpm</span></div><p class="error" id="error" role="alert"></p></div>
           <div class="cta-row"><button class="button primary" id="begin" type="button"><span>Continue with <span id="button-pulse">84</span> bpm</span><span aria-hidden="true">→</span></button></div>
           <p class="privacy" style="margin-top:13px"><strong>Keep it fictional.</strong> Your chosen number stays in this tab. This page does not send or save it.</p>
-          <p class="range-note"><b>Reference:</b> For most adults at rest, 60–100 bpm is a general range. One number cannot diagnose stress or illness.</p>
+          <p class="range-note"><b>Reference:</b> For most adults at rest, 60–100 bpm is a general range. One number cannot establish a person's health or behavior.</p>
         </div>
       </section>
       <section class="screen" id="handoff" aria-labelledby="handoff-title" hidden>
@@ -52,7 +52,7 @@
         <p class="dek">In this fictional story, VitalSense goes further.</p>
         <div class="receipt" aria-label="Simulated data journey">
           <div class="receipt-row"><span class="receipt-label">Input</span><div class="receipt-content"><span id="shown-pulse">84</span> bpm <small>An invented pulse chosen for this exercise.</small></div></div>
-          <div class="receipt-row"><span class="receipt-label">Inference</span><div class="receipt-content">“Elevated stress” <small>An invented label. This pulse value cannot establish stress.</small></div></div>
+          <div class="receipt-row"><span class="receipt-label">Inference</span><div class="receipt-content">“<span id="shown-label">Elevated stress</span>” <small>An invented label from a made-up rule. This pulse value cannot establish it.</small></div></div>
           <div class="receipt-row alert"><span class="receipt-label">New use</span><div class="receipt-content">Shared with other companies <small>Beyond the wellness insights accepted in the story.</small></div></div>
         </div>
         <p class="caution"><b>Pause here:</b> a measurement, an inference, and a decision are different steps. Each needs its own justification. No information is actually shared by this page.</p>
@@ -61,12 +61,14 @@
       <section class="screen" id="outcomes" aria-labelledby="outcomes-title" hidden>
         <p class="kicker">03 / Possible consequences</p>
         <h2 id="outcomes-title" tabindex="-1">Where could<br>the label go?</h2>
-        <p class="dek">Three fictional destinations. Select one to see the possible effect.</p>
+        <p class="dek" id="outcome-intro">The fictional rule selects one possible path. Scroll the tabs to explore other uses.</p>
         <div class="route"><span>VitalSense</span><span class="chev" aria-hidden="true">→</span><span>Other company</span><span class="chev" aria-hidden="true">→</span><span>Decision about you</span></div>
-        <div class="tabs" role="tablist" aria-label="Fictional consequences"><button class="tab" id="tab-ads" type="button" role="tab" aria-controls="panel-ads" aria-selected="true" data-scenario="ads">Ads</button><button class="tab" id="tab-insurance" type="button" role="tab" aria-controls="panel-insurance" aria-selected="false" data-scenario="insurance">Insurance</button><button class="tab" id="tab-work" type="button" role="tab" aria-controls="panel-work" aria-selected="false" data-scenario="work">Work</button></div>
-        <article class="scenario" id="panel-ads" role="tabpanel" aria-labelledby="tab-ads"><p class="category">Fictional company / Advertising</p><h3>AdVista</h3><p class="effect">Uses the invented “stress” label to target wellness ads.</p><p class="detail">A private concern becomes a marketing category, although the label may be wrong.</p></article>
-        <article class="scenario" id="panel-insurance" role="tabpanel" aria-labelledby="tab-insurance" hidden><p class="category">Fictional company / Insurance</p><h3>HarborCover</h3><p class="effect">Uses an invented risk score to reduce a wellness reward.</p><p class="detail">A questionable inference changes a financial outcome.</p></article>
-        <article class="scenario" id="panel-work" role="tabpanel" aria-labelledby="tab-work" hidden><p class="category">Fictional company / Employment</p><h3>Northstar Work</h3><p class="effect">Treats a sleep or stress label as a sign of unreliability.</p><p class="detail">A worker is passed over based on an unsupported profile.</p></article>
+        <div class="tabs" role="tablist" aria-label="Fictional consequences"><button class="tab" id="tab-ads" type="button" role="tab" aria-controls="panel-ads" aria-selected="true" data-scenario="ads">Ads</button><button class="tab" id="tab-insurance" type="button" role="tab" aria-controls="panel-insurance" aria-selected="false" data-scenario="insurance">Insurance</button><button class="tab" id="tab-work" type="button" role="tab" aria-controls="panel-work" aria-selected="false" data-scenario="work">Work</button><button class="tab" id="tab-cycle" type="button" role="tab" aria-controls="panel-cycle" aria-selected="false" data-scenario="cycle">Cycle data</button><button class="tab" id="tab-broker" type="button" role="tab" aria-controls="panel-broker" aria-selected="false" data-scenario="broker">Data broker</button></div>
+        <article class="scenario" id="panel-ads" role="tabpanel" aria-labelledby="tab-ads"><p class="category">Fictional company / Advertising</p><h3>AdVista</h3><p class="effect">Uses the invented “elevated stress” label to place the person in a wellness-ad audience across apps.</p><p class="detail">Ads about stress follow them, potentially exposing a private concern on a shared screen. The label could be wrong, and the person did not agree to this marketing use.</p></article>
+        <article class="scenario" id="panel-insurance" role="tabpanel" aria-labelledby="tab-insurance" hidden><p class="category">Fictional company / Insurance</p><h3>HarborCover</h3><p class="effect">Reads the invented “poor recovery” label and removes a wellness discount at renewal.</p><p class="detail">The person's monthly cost rises because of an unsupported inference. They may not know what data triggered the decision or how to correct it.</p></article>
+        <article class="scenario" id="panel-work" role="tabpanel" aria-labelledby="tab-work" hidden><p class="category">Fictional company / Employment</p><h3>Northstar Work</h3><p class="effect">A manager sees the invented “low energy” label and leaves the worker off an important project.</p><p class="detail">One speculative profile now affects an opportunity for recognition or advancement, even though the pulse says nothing about job performance.</p></article>
+        <article class="scenario" id="panel-cycle" role="tabpanel" aria-labelledby="tab-cycle" hidden><p class="category">Fictional company / Reproductive-data marketing</p><h3>CycleReach</h3><p class="effect">Receives VitalSense's separate cycle predictions and adds the person to a fertility-ad audience.</p><p class="detail">This example uses a different VitalSense feature, not the pulse. Ads could reveal or misrepresent a private life plan that the person never chose to share with marketers.</p></article>
+        <article class="scenario" id="panel-broker" role="tabpanel" aria-labelledby="tab-broker" hidden><p class="category">Fictional company / Data brokerage</p><h3>SignalLedger</h3><p class="effect">Packages a VitalSense wellness label with other data and sells a “health interest” audience to clients.</p><p class="detail">A wrong label can spread to unknown recipients. The person may struggle to discover who has it, challenge it, or make every copy disappear.</p></article>
         <p class="question">Which step should VitalSense have to justify?</p>
         <p class="principles">Collection → inference → sharing → decision. GDPR principles ask whether each use is lawful, limited to its purpose, necessary, accurate, time-limited, and accountable.</p>
         <div class="cta-row bottom"><button class="button back" id="back2" type="button">← Back</button><button class="button primary" id="restart" type="button"><span>Start again</span><span aria-hidden="true">↺</span></button></div>
@@ -80,7 +82,13 @@
       let pulse = 84;
       let selected = 84;
       const ids = ['intro', 'handoff', 'outcomes'];
+      const scenarioNames = ['ads','insurance','work','cycle','broker'];
       const $ = id => document.getElementById(id);
+      const fictionalPath = value => value < 80
+        ? { label: 'Low energy', scenario: 'work', destination: 'Work' }
+        : value < 90
+          ? { label: 'Elevated stress', scenario: 'ads', destination: 'Ads' }
+          : { label: 'Poor recovery', scenario: 'insurance', destination: 'Insurance' };
       function show(index) {
         ids.forEach((id, i) => { $(id).hidden = i !== index; });
         $('step').textContent = `0${index + 1} / 03`;
@@ -120,7 +128,11 @@
         }
         pulse = value;
         updatePulse(pulse);
+        const path = fictionalPath(pulse);
         $('shown-pulse').textContent = String(pulse);
+        $('shown-label').textContent = path.label;
+        $('outcome-intro').textContent = `For this ${pulse} bpm example, an invented rule selects ${path.destination}. Scroll the tabs for other fictional uses, including different VitalSense data.`;
+        selectScenario(path.scenario);
         $('custom').value = '';
         show(1);
       });
@@ -134,17 +146,16 @@
           tab.tabIndex = active ? 0 : -1;
           if (active && focus) tab.focus();
         });
-        ['ads','insurance','work'].forEach(key => { $('panel-' + key).hidden = key !== name; });
+        scenarioNames.forEach(key => { $('panel-' + key).hidden = key !== name; });
       }
       document.querySelectorAll('[data-scenario]').forEach(tab => {
         tab.addEventListener('click', () => selectScenario(tab.dataset.scenario));
         tab.addEventListener('keydown', event => {
           if (!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
           event.preventDefault();
-          const names = ['ads','insurance','work'];
-          const current = names.indexOf(tab.dataset.scenario);
-          const next = event.key === 'Home' ? 0 : event.key === 'End' ? 2 : (current + (event.key === 'ArrowRight' ? 1 : 2)) % 3;
-          selectScenario(names[next], true);
+          const current = scenarioNames.indexOf(tab.dataset.scenario);
+          const next = event.key === 'Home' ? 0 : event.key === 'End' ? scenarioNames.length - 1 : (current + (event.key === 'ArrowRight' ? 1 : scenarioNames.length - 1)) % scenarioNames.length;
+          selectScenario(scenarioNames[next], true);
         });
       });
       $('restart').addEventListener('click', () => {
